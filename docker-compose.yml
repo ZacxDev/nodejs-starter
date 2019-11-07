@@ -1,0 +1,9 @@
+version: '3'
+services:
+  api:
+    container_name: 'mobl_merchant_api'
+    build: '.'
+    volumes:
+      - .:/home/node/app
+    ports:
+      - '${PORT:-4000}:4000'
