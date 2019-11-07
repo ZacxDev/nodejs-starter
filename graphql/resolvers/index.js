@@ -1,33 +1,21 @@
-import fs from 'fs';
-import path from 'path';
-
-const queryFiles = fs.readdirSync(path.resolve(__dirname, 'queries'));
-const mutationFiles = fs.readdirSync(path.resolve(__dirname, 'mutations'));
+const requireQueries = require.context('./queries', true, /\.js$/);
+const requireMutations = require.context('./mutations', true, /\.js$/);
 
 const exportedFunctions = {
   Query: {},
   Mutation: {},
 };
-queryFiles.forEach((file) => {
-  if (!/\.js/.test(file)) {
-    return;
-  }
-  file = file.replace(/\..*/, '');
-  exportedFunctions.Query[file] = require(
-      path.resolve(__dirname, 'queries', file)
-  );
-  console.log('Loaded query: ' + file);
+
+requireQueries.keys().forEach(file => {
+  const queryName = file.replace(/\.\//, '').replace(/\.js/, '');
+  const queryFunc = requireQueries(file).default;
+  exportedFunctions.Query[queryName] = queryFunc;
 });
 
-mutationFiles.forEach((file) => {
-  if (!/\.js/.test(file)) {
-    return;
-  }
-  file = file.replace(/\..*/, '');
-  exportedFunctions.Mutation[file] = require(
-      path.resolve(__dirname, 'mutations', file)
-  );
-  console.log('Loaded mutation: ' + file);
+requireMutations.keys().forEach(file => {
+  const mutationName = file.replace(/\.\//, '').replace(/\.js/, '');
+  const mutationFunc = requireMutations(file).default;
+  exportedFunctions.Mutation[mutationName] = mutationFunc;
 });
 
 export default exportedFunctions;

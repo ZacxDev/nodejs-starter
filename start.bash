@@ -1,5 +1,7 @@
 #!/bin/bash
 
+npm run migrate-internal &&
+
 COMMAND="nodemon"
 if [ "$NODE_ENV" = "production" ]; then
   COMMAND="node"

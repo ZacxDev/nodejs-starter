@@ -1,9 +1,13 @@
-version: '3'
+version: '3.5'
 services:
   api:
-    container_name: 'mobl_merchant_api'
+    container_name: 'mobl_BOILERPLATE_api'
     build: '.'
     volumes:
       - .:/home/node/app
     ports:
       - '${PORT:-4000}:4000'
+networks:
+  default:
+    external:
+      name: mobl-local

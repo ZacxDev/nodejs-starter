@@ -4,6 +4,7 @@
 
 import app from './app';
 const http = require('http');
+require('dotenv').config();
 
 /**
  * Get port from environment and store in Express.
@@ -21,6 +22,7 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+
 
 server.listen(port);
 server.on('error', onError);
