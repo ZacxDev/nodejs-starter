@@ -8,7 +8,10 @@
     ],
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        "require": "readonly",
+        "process": "readonly",
+        "__dirname": "readonly"
     },
     "parserOptions": {
         "ecmaVersion": 2018,
@@ -20,6 +23,7 @@
       "object-curly-spacing": "off",
       "comma-dangle": "off",
       "no-unused-vars": "warn",
-      "no-undef": "error"
+      "no-undef": "error",
+      "arrow-parens": "off"
     }
 }
