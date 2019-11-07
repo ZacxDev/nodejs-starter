@@ -22,7 +22,7 @@ module.exports = {
   client: 'mysql',
   connection: connectionParams,
   migrations: {
-    tableName: 'moblMigrations',
+    tableName: 'myAppMigrations',
     directory: './migrations'
   }
 };
