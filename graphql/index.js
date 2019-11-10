@@ -9,7 +9,7 @@ const {
   DB_SOCKET_CONNECTION_STRING,
   MYSQL_CONNECTION_STRING,
   NODE_ENV
-} = process.env;
+} = env;
 
 const useApolloMiddleware = app => {
   let connectionParams = MYSQL_CONNECTION_STRING;
@@ -66,7 +66,7 @@ const useApolloMiddleware = app => {
 
   const cors = {
     credentials: true,
-    origin: process.env.CLIENT_URL || 'https://mobl.ca',
+    origin: env.CLIENT_URL || 'https://mobl.ca',
     allowedHeaders: [
       'Content-Type',
       'Authorization',

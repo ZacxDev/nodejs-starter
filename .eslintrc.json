@@ -1,31 +1,32 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-    "extends": [
-        "google"
-    ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly",
-        "require": "readonly",
-        "process": "readonly",
-        "__dirname": "readonly",
-        "module": "readonly",
-        "exports": "readonly"
-    },
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "rules": {
-      "require-jsdoc": "off",
-      "new-cap": "off",
-      "object-curly-spacing": "off",
-      "comma-dangle": "off",
-      "no-unused-vars": "warn",
-      "no-undef": "error",
-      "arrow-parens": "off"
-    }
+  "env": {
+      "browser": true,
+      "es6": true
+  },
+  "extends": [
+      "google"
+  ],
+  "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly",
+      "require": "readonly",
+      "process": "readonly",
+      "env": true,
+      "__dirname": "readonly",
+      "module": "readonly",
+      "exports": "readonly"
+  },
+  "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+  },
+  "rules": {
+    "require-jsdoc": "off",
+    "new-cap": "off",
+    "object-curly-spacing": "off",
+    "comma-dangle": "off",
+    "no-unused-vars": "warn",
+    "no-undef": "error",
+    "arrow-parens": "off"
+  }
 }

@@ -8,7 +8,7 @@ const logger = require('morgan');
 const app = express();
 
 const corsOptions = {
-  origin: process.env.CLIENT_URL,
+  origin: env.CLIENT_URL,
   credentials: true,
   methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'HEAD']
 };

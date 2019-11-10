@@ -1,10 +1,17 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const webpack = require('webpack');
 require('dotenv').config();
+const { env } = process;
+const { NODE_ENV } = process.env;
+
+Object.keys(env).forEach((k) => {
+  env[k] = `'${env[k]}'`;
+});
 
 module.exports = {
   target: 'node',
-  mode: process.env.NODE_ENV,
+  mode: NODE_ENV,
   devtool: 'source-map',
   watch: true,
   entry: {
@@ -15,4 +22,7 @@ module.exports = {
     filename: 'dist.js',
   },
   externals: [nodeExternals()],
+  plugins: [
+    new webpack.DefinePlugin({ env })
+  ]
 };
