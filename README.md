@@ -1,4 +1,4 @@
-# Merchant API
+# Boilerplate API
 
 # Requirements
 
@@ -8,5 +8,11 @@
 # Setup
 
 - `npm i`
-- Run `webpack` to generate the artifact, you only need to run this the first time.
+- `cp .env.example .env`
+- Run `npx webpack` to generate the artifact, you only need to run this the first time.
 - `docker-compose up`
+
+# Migrations
+
+To create a migration: `npx knex migrate:make <migration name>`.
+To run migrations: `npm run migrate`
