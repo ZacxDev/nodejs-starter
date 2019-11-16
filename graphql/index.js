@@ -50,10 +50,17 @@ const useApolloMiddleware = app => {
                 .first();
           }
 
-          const session = loggedInUser ? {
+          if (!loggedInUser) {
+            throw new Error(JSON.stringify({
+              publicMessage: 'You must be logged in to do that!',
+              type: 'NOT_LOGGED_IN'
+            }));
+          }
+
+          const session = {
             user: loggedInUser,
             userId: loggedInUser.id
-          } : {};
+          };
 
           return {
             session,
