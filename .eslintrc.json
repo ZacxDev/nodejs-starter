@@ -27,6 +27,7 @@
     "comma-dangle": "off",
     "no-unused-vars": "warn",
     "no-undef": "error",
-    "arrow-parens": "off"
+    "arrow-parens": "off",
+    "max-len": "warn"
   }
 }

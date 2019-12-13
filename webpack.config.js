@@ -20,6 +20,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'dist.js',
+    devtoolModuleFilenameTemplate: '[absolute-resource-path]'
   },
   externals: [nodeExternals()],
   plugins: [

@@ -6,15 +6,22 @@
     "start": "./start.bash",
     "migrate": "docker exec project_fresh_api npx knex migrate:latest",
     "migrate-internal": "knex migrate:latest",
-    "test": "echo Write Tests Nerd"
+    "test": "echo Write Tests Nerd",
+    "dev": "docker-compose up"
   },
   "dependencies": {
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-client": "^2.6.4",
+    "apollo-link-error": "^1.1.12",
+    "apollo-link-http": "^1.5.16",
     "apollo-server-express": "^2.9.7",
     "cookie-parser": "~1.4.4",
+    "cross-fetch": "^3.0.4",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "forever": "^1.0.0",
     "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "knex": "^0.20.1",

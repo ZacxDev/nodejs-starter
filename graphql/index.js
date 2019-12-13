@@ -2,27 +2,11 @@ import { ApolloServer, gql, makeExecutableSchema } from 'apollo-server-express';
 import moment from 'moment';
 import rawSchema from './schema';
 import rootResolver from './resolvers';
+import * as clients from './clients';
 
-const {
-  MYSQL_ROOT_PASSWORD,
-  MYSQL_DATABASE,
-  DB_SOCKET_CONNECTION_STRING,
-  MYSQL_CONNECTION_STRING,
-  NODE_ENV
-} = env;
+const { knex } = clients;
 
 const useApolloMiddleware = app => {
-  let connectionParams = MYSQL_CONNECTION_STRING;
-
-  if (NODE_ENV === 'production') {
-    connectionParams = {
-      user: 'root',
-      password: MYSQL_ROOT_PASSWORD,
-      database: MYSQL_DATABASE,
-      socketPath: DB_SOCKET_CONNECTION_STRING
-    };
-  }
-
   const schema = makeExecutableSchema({
     typeDefs: gql(rawSchema),
     resolvers: rootResolver,
@@ -31,10 +15,6 @@ const useApolloMiddleware = app => {
   const apolloServer = new ApolloServer({
     schema,
     context: async ({ req }) => {
-      const knex = require('knex')({
-        client: 'mysql',
-        connection: connectionParams
-      });
       if (req) {
         let loggedInUser;
         if (req.me) {
@@ -64,7 +44,8 @@ const useApolloMiddleware = app => {
 
           return {
             session,
-            knex
+            knex,
+            clients
           };
         }
       }

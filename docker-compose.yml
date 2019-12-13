@@ -7,6 +7,7 @@ services:
       - .:/home/node/app
     ports:
       - '${PORT:-4000}:4000'
+      - '${DEBUGGER_PORT:-5858}:5858'
 networks:
   default:
     external:
