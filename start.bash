@@ -9,4 +9,4 @@ else
   npx webpack &
 fi
 
-npx forever -a --uid "mobl_merchant_api_process" -c "$COMMAND" build/dist.js 
+npx forever -a --uid "boilerplate_api_process" -c "$COMMAND" build/dist.js 

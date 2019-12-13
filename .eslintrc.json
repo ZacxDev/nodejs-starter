@@ -11,7 +11,7 @@
       "SharedArrayBuffer": "readonly",
       "require": "readonly",
       "process": "readonly",
-      "env": true,
+      "env": "readonly",
       "__dirname": "readonly",
       "module": "readonly",
       "exports": "readonly"
@@ -25,9 +25,9 @@
     "new-cap": "off",
     "object-curly-spacing": "off",
     "comma-dangle": "off",
-    "no-unused-vars": "warn",
     "no-undef": "error",
     "arrow-parens": "off",
-    "max-len": "warn"
+    "max-len": "warn",
+    "no-unused-vars": [2, {"args": "all", "argsIgnorePattern": "^unused"}]
   }
 }

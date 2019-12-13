@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   api:
-    container_name: 'mobl_BOILERPLATE_api'
+    container_name: 'BOILERPLATE_api'
     build: '.'
     volumes:
       - .:/home/node/app
@@ -11,4 +11,4 @@ services:
 networks:
   default:
     external:
-      name: mobl-local
+      name: boilerplate-local

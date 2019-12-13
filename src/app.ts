@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(cors(corsOptions));
 
-app.get('/', function(req, res, next) {
+app.get('/', function(req: object, res: {json: Function}, next: Function) {
   res.json({
     health: 'healthy',
   });

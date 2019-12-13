@@ -12,10 +12,17 @@ Object.keys(env).forEach((k) => {
 module.exports = {
   target: 'node',
   mode: NODE_ENV,
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   watch: true,
   entry: {
-    app: ['./server.js'],
+    app: ['./src/server.js'],
+  },
+  module: {
+    rules: [{
+      test: /\.tsx?$/,
+      use: 'ts-loader',
+      exclude: /node_modules/
+    }]
   },
   output: {
     path: path.resolve(__dirname, './build'),
@@ -24,6 +31,12 @@ module.exports = {
   },
   externals: [nodeExternals()],
   plugins: [
-    new webpack.DefinePlugin({ env })
-  ]
+    new webpack.DefinePlugin({ Env: env })
+  ],
+  resolve: {
+    extensions: ['.ts', '.js'],
+    alias: {
+      Helpers: path.resolve(__dirname, './src/helpers'),
+    }
+  }
 };
