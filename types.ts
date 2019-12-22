@@ -1,5 +1,5 @@
 interface Session {
-  userId: number
+  userId: number;
 }
 interface ApolloContext {
   session: Session;

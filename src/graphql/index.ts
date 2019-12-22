@@ -3,11 +3,11 @@ import moment from 'moment';
 import rawSchema from './schema';
 import rootResolver from './resolvers';
 import * as clients from './clients';
-import express from 'express'
+import express from 'express';
 
 const { knex } = clients;
 
-const useApolloMiddleware = (app: express.Application) => {
+const useApolloMiddleware = (app: express.Application): void => {
   const schema = makeExecutableSchema({
     typeDefs: gql(rawSchema),
     resolvers: rootResolver,
@@ -15,17 +15,17 @@ const useApolloMiddleware = (app: express.Application) => {
 
   const apolloServer = new ApolloServer({
     schema,
-    context: async ({ req }) => {
+    context: async ({ req }): Promise<{ [key: string]: object }> => {
       if (req) {
         let loggedInUser;
         const { sessionKey } = req.cookies;
         if (sessionKey) {
           const rawMoment = moment().format('YYYY-MM-DD HH:mm:ss');
           loggedInUser = await knex('user')
-              .select('*')
-              .where('sessionKey', sessionKey)
-              .andWhere('sessionExpiry', '>', rawMoment)
-              .first();
+            .select('*')
+            .where('sessionKey', sessionKey)
+            .andWhere('sessionExpiry', '>', rawMoment)
+            .first();
         }
 
         if (!loggedInUser) {
@@ -51,7 +51,7 @@ const useApolloMiddleware = (app: express.Application) => {
 
   const cors = {
     credentials: true,
-    origin: env.CLIENT_URL,
+    origin: process.env.CLIENT_URL,
     allowedHeaders: [
       'Content-Type',
       'Authorization',

@@ -1,14 +1,9 @@
-import { IResolvers } from "graphql-tools";
+import { IResolvers } from 'graphql-tools';
 
 const requireQueries = require.context('./queries', true, /\.js$/);
 const requireMutations = require.context('./mutations', true, /\.js$/);
 
-interface Resolvers {
-  Query: IResolvers<any, any>
-  Mutation: IResolvers<any, any>
-}
-
-const exportedFunctions: Resolvers = {
+const exportedFunctions: { [ key: string ]: IResolvers<any, any> } = {
   Query: {},
   Mutation: {},
 };

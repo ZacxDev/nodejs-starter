@@ -2,18 +2,13 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
 require('dotenv').config();
-const { env } = process;
-const { NODE_ENV } = process.env;
-
-Object.keys(env).forEach((k) => {
-  env[k] = `'${env[k]}'`;
-});
+const { NODE_ENV, CI } = process.env;
 
 module.exports = {
   target: 'node',
   mode: NODE_ENV,
-  devtool: 'inline-source-map',
-  watch: true,
+  devtool: NODE_ENV !== 'production' ? 'source-map' : 'inline-source-map',
+  watch: !CI && NODE_ENV !== 'production',
   entry: {
     app: ['./src/server.js'],
   },
@@ -30,13 +25,7 @@ module.exports = {
     devtoolModuleFilenameTemplate: '[absolute-resource-path]'
   },
   externals: [nodeExternals()],
-  plugins: [
-    new webpack.DefinePlugin({ Env: env })
-  ],
   resolve: {
-    extensions: ['.ts', '.js'],
-    alias: {
-      Helpers: path.resolve(__dirname, './src/helpers'),
-    }
+    extensions: ['.ts', '.js']
   }
 };

@@ -4,7 +4,7 @@ const {
   DB_SOCKET_CONNECTION_STRING,
   MYSQL_CONNECTION_STRING,
   NODE_ENV
-} = env;
+} = process.env;
 let connectionParams = MYSQL_CONNECTION_STRING;
 
 if (NODE_ENV === 'production') {

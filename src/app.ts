@@ -8,7 +8,7 @@ const logger = require('morgan');
 const app = express();
 
 const corsOptions = {
-  origin: env.CLIENT_URL,
+  origin: process.env.CLIENT_URL,
   credentials: true,
   methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'HEAD']
 };
@@ -21,7 +21,8 @@ app.use(cors(corsOptions));
 
 app.get('/', function(req: object, res: {json: Function}, next: Function) {
   res.json({
-    health: 'healthy',
+    api: process.env.APP_NAME,
+    health: 'healthy'
   });
 });
 

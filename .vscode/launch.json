@@ -13,18 +13,18 @@
       "restart": true,
       "timeout": 120000,
       "localRoot": "${workspaceFolder}",
-      "remoteRoot": "/home/node/app",
+      "remoteRoot": "/home/mobl",
       "smartStep": true,
       "showAsyncStacks": true,
       "sourceMapPathOverrides": {
-        "/home/node/app/*": "${workspaceFolder}/*"
+        "/home/mobl*": "${workspaceFolder}/*"
       },
       "outFiles": [
         "${workspaceFolder}/build/dist.js"
       ],
       "skipFiles": [
         "<node_internals>/**/*.js",
-        "/home/node/app/node_modules/**/*.js"
+        "/home/mobl/node_modules/**/*.js"
       ],
       "internalConsoleOptions": "neverOpen",
       "sourceMaps": true

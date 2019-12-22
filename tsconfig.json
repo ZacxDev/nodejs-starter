@@ -11,6 +11,6 @@
     "baseUrl": "."
   },
   "include": [
-    "src", "globals.d.ts", "types.ts"
+    "src", "types.ts"
   ]
 }

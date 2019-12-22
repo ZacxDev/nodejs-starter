@@ -1,5 +1,7 @@
 # Mircoservice Boilerplate
 
+If you use this project, please give it a star so I know I need to maintain this fork.
+
 ### Requirements
 
 - Docker/Docker Compose

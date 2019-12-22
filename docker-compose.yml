@@ -4,7 +4,7 @@ services:
     container_name: 'BOILERPLATE_api'
     build: '.'
     volumes:
-      - .:/home/node/app
+      - .:/home/mobl
     ports:
       - '${PORT:-4000}:4000'
       - '${DEBUGGER_PORT:-5858}:5858'

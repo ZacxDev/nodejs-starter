@@ -1,10 +1,11 @@
 {
   "env": {
-      "browser": true,
+      "browser": false,
       "es6": true
   },
   "extends": [
-      "google"
+      "google",
+      "plugin:@typescript-eslint/recommended"
   ],
   "globals": {
       "Atomics": "readonly",
@@ -14,20 +15,36 @@
       "env": "readonly",
       "__dirname": "readonly",
       "module": "readonly",
-      "exports": "readonly"
+      "exports": "readonly",
+      "console": "readonly"
   },
   "parserOptions": {
       "ecmaVersion": 2018,
-      "sourceType": "module"
+      "sourceType": "module",
+      "project": "./tsconfig.json"
   },
   "rules": {
     "require-jsdoc": "off",
     "new-cap": "off",
     "object-curly-spacing": "off",
     "comma-dangle": "off",
+    "no-unused-vars": "warn",
     "no-undef": "error",
     "arrow-parens": "off",
     "max-len": "warn",
-    "no-unused-vars": [2, {"args": "all", "argsIgnorePattern": "^unused"}]
-  }
+    "indent": ["warn", 2],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-var-requires": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": ["error"],
+        "@typescript-eslint/no-var-requires": "warn"
+      }
+    }
+  ],
+  "plugins": ["@typescript-eslint"],
+  "parser": "@typescript-eslint/parser"
 }

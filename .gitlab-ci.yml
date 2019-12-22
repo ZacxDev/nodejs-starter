@@ -1,0 +1,59 @@
+# image: docker:19.03.1
+# stages:
+#   - build
+#   # - test
+#   - publish
+
+# services:
+#   - docker:19.03.1-dind
+# variables:
+#   DOCKER_DRIVER: overlay
+
+# build_api_image:
+#   stage: build
+#   variables:
+#     # Insecure mode is ok because we are just caching dependancies
+#     DOCKER_TLS_CERTDIR: ""
+#     DOCKER_HOST: tcp://docker:2375
+#   before_script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#   script:
+#     - docker pull $CI_REGISTRY_IMAGE:latest || true
+#     - docker pull $CI_REGISTRY_IMAGE/cache:latest || true
+#     - docker build -t $IMAGE_NAME --build-arg NODE_ENV=$NODE_ENV --cache-from $CI_REGISTRY_IMAGE:latest --cache-from $CI_REGISTRY_IMAGE/cache:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
+#     - docker images --filter "label=cache=true" --format '{{.CreatedAt}}\t{{.ID}}' | sort -nr | head -n 1 | cut -f2 | (read intermediateCacheArtifact; docker tag $intermediateCacheArtifact $CI_REGISTRY_IMAGE/cache:latest)
+#     - docker image ls
+#     - docker push $CI_REGISTRY_IMAGE/cache:latest
+#     - docker push $CI_REGISTRY_IMAGE:latest
+#     - mkdir images
+#     - docker save $IMAGE_NAME > images/$IMAGE_NAME.tar
+#   artifacts:
+#     paths:
+#       - images
+
+# .before_script_template: &publish_before_script
+#   before_script:
+#     - apk add --update make ca-certificates openssl python curl
+#     - update-ca-certificates
+#     - echo $GCLOUD_SERVICE_KEY > ~/gcloud-service-key.json
+#     - wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
+#     - tar zxvf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=true
+#     - export PATH=google-cloud-sdk/bin/:$PATH
+#     - gcloud components update --quiet
+#     - gcloud auth activate-service-account ci-gitlab@freshtake-signin-1567204283147.iam.gserviceaccount.com --key-file ~/gcloud-service-key.json
+#     - gcloud components install beta --quiet
+#     - gcloud config set project $GCLOUD_PROJECT_ID
+#     - gcloud beta config set run/platform managed
+#     - gcloud beta config set run/region us-central1
+#     - docker login -u _json_key --password-stdin https://gcr.io < ~/gcloud-service-key.json
+
+# publish:production:
+#   stage: publish
+#   <<: *publish_before_script
+#   script:
+#     - docker load -i images/$IMAGE_NAME.tar
+#     - docker tag $IMAGE_NAME "gcr.io/$GCLOUD_PROJECT_ID/$IMAGE_NAME:production"
+#     - docker push "gcr.io/$GCLOUD_PROJECT_ID/$IMAGE_NAME:production"
+#     - gcloud beta run deploy $PRODUCTION_SERVICE_NAME --image "gcr.io/$GCLOUD_PROJECT_ID/$IMAGE_NAME:production" --async --quiet
+#   only:
+#     - master
