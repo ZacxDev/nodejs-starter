@@ -1,3 +1,10 @@
 node_modules
 .env
+.env.example
+.git
 build
+.gitignore
+docker-compose.yml
+.gitlab-ci.yml
+README.md
+__tests__

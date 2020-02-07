@@ -1,0 +1,8 @@
+{
+  "extends": ["../.eslintrc", "plugin:ava/recommended"],
+  "plugins": ["ava"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  }
+}

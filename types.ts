@@ -1,8 +1,15 @@
+interface User {
+  fullName: string;
+  emailAddress: string;
+  uid: string;
+  id: number;
+}
 interface Session {
+  user: User;
   userId: number;
 }
-interface ApolloContext {
+interface Context {
   session: Session;
-  clients: object;
-  knex: Function;
+  utcOffset: string;
+  knex?: any;
 }

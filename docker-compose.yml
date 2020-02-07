@@ -1,14 +1,19 @@
 version: '3.5'
 services:
-  api:
-    container_name: 'BOILERPLATE_api'
-    build: '.'
+  BOILERPLATE_api:
+    container_name: 'mobl_BOILERPLATE_api'
+    image: ${CI_REGISTRY_IMAGE:-mobl_local}/mobl-dev_boilerplate_api:${CI_COMMIT_REF_SLUG:-latest}
+    build: '${_API_RELATIVE_COMPOSE:-.}'
+    restart: on-failure
     volumes:
-      - .:/home/mobl
+      - ${_API_RELATIVE_COMPOSE:-.}:/home/mobl
+      - /home/mobl/__tests__
+      - /home/mobl/build
     ports:
-      - '${PORT:-4000}:4000'
-      - '${DEBUGGER_PORT:-5858}:5858'
-# networks:
-#   default:
-#     external:
-#       name: mobl-local
+      - '${_API_PORT:-4004}:4000'
+      - '${DEBUGGER_PORT:-5859}:5858'
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:4000"]
+    # depends_on:
+    # - mysql_db
+    # - mono_api

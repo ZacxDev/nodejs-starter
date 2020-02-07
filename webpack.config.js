@@ -1,22 +1,23 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const webpack = require('webpack');
 require('dotenv').config();
 const { NODE_ENV, CI } = process.env;
 
 module.exports = {
   target: 'node',
   mode: NODE_ENV,
-  devtool: NODE_ENV !== 'production' ? 'source-map' : 'inline-source-map',
+  devtool: 'inline-source-map',
   watch: !CI && NODE_ENV !== 'production',
   entry: {
-    app: ['./src/server.js'],
+    app: ['./src/server.ts'],
   },
   module: {
     rules: [{
-      test: /\.tsx?$/,
+      test: /\.ts$/,
       use: 'ts-loader',
-      exclude: /node_modules/
+      include: [
+        path.resolve(__dirname, './src'),
+      ]
     }]
   },
   output: {
@@ -26,6 +27,12 @@ module.exports = {
   },
   externals: [nodeExternals()],
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
+    alias: {
+      Helpers: path.resolve(__dirname, './src/helpers'),
+      Clients: path.resolve(__dirname, './src/clients'),
+      Services: path.resolve(__dirname, './src/services'),
+      Repositories: path.resolve(__dirname, './src/repositories'),
+    }
   }
 };

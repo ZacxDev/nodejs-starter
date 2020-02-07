@@ -3,14 +3,40 @@
     "outDir": "./build/",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "es6",
+    "module": "CommonJS",
     "target": "es5",
+    "esModuleInterop": true,
     "allowJs": true,
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "Helpers": [
+        "src/helpers/index.ts"
+      ],
+      "Helpers/*": [
+        "src/helpers/*"
+      ],
+      "Clients/*": [
+        "src/clients/*"
+      ],
+      "Services/*": [
+        "src/services/*"
+      ],
+      "Mutations/*": [
+        "src/graphql/resolvers/mutations/*"
+      ],
+      "Repositories/*": [
+        "src/repositories/*"
+      ]
+    }
   },
   "include": [
-    "src", "types.ts"
+    "src", "globals.d.ts", "types.ts", "__tests__"
+  ],
+  "files": [
+    "knexfile.js",
+    "webpack.config.js"
   ]
 }
