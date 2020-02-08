@@ -50,6 +50,7 @@ app.set('port', port);
  * Event listener for HTTP server "error" event.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const onError = (error: any): void => {
   if (error.syscall !== 'listen') {
     throw error;

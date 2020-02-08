@@ -12,12 +12,6 @@
     "baseUrl": ".",
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "Helpers": [
-        "src/helpers/index.ts"
-      ],
-      "Helpers/*": [
-        "src/helpers/*"
-      ],
       "Clients/*": [
         "src/clients/*"
       ],

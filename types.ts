@@ -11,5 +11,4 @@ interface Session {
 interface Context {
   session: Session;
   utcOffset: string;
-  knex?: any;
 }

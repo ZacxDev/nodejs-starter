@@ -28,13 +28,14 @@
     "new-cap": "off",
     "object-curly-spacing": "off",
     "comma-dangle": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": ["warn", {"caughtErrors":"all", "caughtErrorsIgnorePattern": "^unused($|[A-Z].*$)", "argsIgnorePattern": "^unused($|[A-Z].*$)", "varsIgnorePattern": "^unused($|[A-Z].*$)" }],
     "no-undef": "error",
     "arrow-parens": "off",
     "max-len": "warn",
     "indent": ["warn", 2],
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-var-requires": "off"
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", {"caughtErrors":"all", "caughtErrorsIgnorePattern": "^unused($|[A-Z].*$)", "argsIgnorePattern": "^unused($|[A-Z].*$)", "varsIgnorePattern": "^unused($|[A-Z].*$)" }]
   },
   "overrides": [
     {

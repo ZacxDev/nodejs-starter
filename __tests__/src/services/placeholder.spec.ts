@@ -1,7 +1,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import knexClient from 'knex';
-import { QueryDetails, getTracker, mock, unmock } from 'mock-knex';
+import { getTracker, mock, unmock } from 'mock-knex';
 
 const tracker = getTracker();
 const knex = knexClient({
@@ -9,16 +9,18 @@ const knex = knexClient({
 });
 
 test.beforeEach(() => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   mock(knex as any);
   tracker.install();
 });
 
 test.afterEach(() => {
   tracker.uninstall();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   unmock(knex as any);
   sinon.restore();
 });
 
-test('placeholder (Happy)', async t => {
+test('placeholder (Happy)', t => {
   t.is(1, 1);
 });

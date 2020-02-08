@@ -3,6 +3,7 @@ import { IResolvers } from 'graphql-tools';
 const requireQueries = require.context('./queries', true, /\.js$/);
 const requireMutations = require.context('./mutations', true, /\.js$/);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const exportedFunctions: { [ key: string ]: IResolvers<any, any> } = {
   Query: {},
   Mutation: {},

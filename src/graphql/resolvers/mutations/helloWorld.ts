@@ -1,3 +1,7 @@
-export default async function(unused: object, { message }: { message: string }, context: Context): Promise<string> {
+export default async (
+  unused: object,
+  { message }: { message: string },
+  unusedContext: Context
+): Promise<string> => {
   return `Hello, World!  With Message: ${message}`;
 };

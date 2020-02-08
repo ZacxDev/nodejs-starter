@@ -3,9 +3,9 @@ import moment from 'moment';
 import rawSchema from './schema';
 import rootResolver from './resolvers';
 import { createConnection } from 'Clients/KnexClient';
-import express from 'express';
+import { Express } from 'express';
 
-const useApolloMiddleware = (app: express.Express): void => {
+const useApolloMiddleware = (app: Express): void => {
   const schema = makeExecutableSchema({
     typeDefs: gql(rawSchema),
     resolvers: rootResolver,
@@ -38,8 +38,7 @@ const useApolloMiddleware = (app: express.Express): void => {
 
           return {
             session,
-            utcOffset: utcOffset as string,
-            knex
+            utcOffset: utcOffset as string
           };
         }
       }
