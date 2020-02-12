@@ -1,22 +1,32 @@
-import { IResolvers } from 'graphql-tools';
+interface WebpackRequire extends NodeRequire {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  context: (path: string, recursive: boolean, pattern: RegExp) => any;
+}
 
-const requireQueries = require.context('./queries', true, /\.js$/);
-const requireMutations = require.context('./mutations', true, /\.js$/);
+const { context } = (require as WebpackRequire);
+const requireQueries = context('./queries', false, /\.ts$/);
+const requireMutations = context('./mutations', false, /\.ts$/);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const exportedFunctions: { [ key: string ]: IResolvers<any, any> } = {
+const exportedFunctions: {
+  Query: {
+    [key: string]: Function;
+  };
+  Mutation: {
+    [key: string]: Function;
+  };
+} = {
   Query: {},
-  Mutation: {},
+  Mutation: {}
 };
 
-requireQueries.keys().forEach((file: string) => {
-  const queryName = file.replace(/\.\//, '').replace(/\.js/, '');
+requireQueries.keys().forEach((file: string): void => {
+  const queryName = file.replace(/\.\//, '').replace(/\.[jt]s/, '');
   const queryFunc = requireQueries(file).default;
   exportedFunctions.Query[queryName] = queryFunc;
 });
 
-requireMutations.keys().forEach((file: string) => {
-  const mutationName = file.replace(/\.\//, '').replace(/\.js/, '');
+requireMutations.keys().forEach((file: string): void => {
+  const mutationName = file.replace(/\.\//, '').replace(/\.[jt]s/, '');
   const mutationFunc = requireMutations(file).default;
   exportedFunctions.Mutation[mutationName] = mutationFunc;
 });
