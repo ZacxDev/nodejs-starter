@@ -10,8 +10,8 @@ services:
       - /home/mobl/__tests__
       - /home/mobl/build
     ports:
-      - '${_API_PORT:-4004}:4000'
-      - '${DEBUGGER_PORT:-5859}:5858'
+      - '${PORT:-4000}:4000'
+      - '${DEBUGGER_PORT:-5858}:5858'
     healthcheck:
       test: ["CMD", "wget", "--spider", "http://localhost:4000"]
     # depends_on:

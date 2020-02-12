@@ -1,8 +1,8 @@
-import useApolloMiddleware from './graphql';
 import cors from 'cors';
 import express, { Response, Request, NextFunction } from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import HealthCheckController from './controllers/HealthCheckController';
 
 const app = express();
 const corsOptions = {
@@ -16,13 +16,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(cors(corsOptions));
 
-app.get('/', (req: Request, res: Response, unusedNext: NextFunction) => {
-  res.json({
-    api: process.env.APP_NAME,
-    health: 'healthy'
-  });
+app.get('/', async (req: Request, res: Response, unusedNext: NextFunction) => {
+  await HealthCheckController.handle(req, res);
 });
-
-useApolloMiddleware(app);
 
 export default app;
