@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strict": true,
     "outDir": "./build/",
     "sourceMap": true,
     "noImplicitAny": true,
@@ -12,25 +13,18 @@
     "baseUrl": ".",
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "Clients/*": [
-        "src/clients/*"
+      "Controllers/*": [
+        "src/controllers/*"
       ],
       "Services/*": [
         "src/services/*"
       ],
-      "Mutations/*": [
-        "src/graphql/resolvers/mutations/*"
-      ],
-      "Repositories/*": [
-        "src/repositories/*"
+      "Clients/*": [
+        "src/clients/*"
       ]
     }
   },
   "include": [
-    "src", "globals.d.ts", "types.ts", "__tests__"
-  ],
-  "files": [
-    "knexfile.js",
-    "webpack.config.js"
+    "src", "__tests__"
   ]
 }

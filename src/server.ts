@@ -2,9 +2,9 @@
  * Module dependencies.
  */
 
+require('dotenv').config();
 import app from './app';
 import http from 'http';
-require('dotenv').config();
 
 /**
  * Create HTTP server.
@@ -33,10 +33,12 @@ const normalizePort = (val: number|string): number|string => {
 
 const onListening = (): void => {
   const addr = server.address();
-  const bind = typeof addr === 'string' ?
-    'pipe ' + addr :
-    'port ' + addr.port;
-  console.log('Listening on ' + bind);
+  if (addr) {
+    const bind = typeof addr === 'string' ?
+      'pipe ' + addr :
+      'port ' + addr.port;
+    console.log('Listening on ' + bind);
+  }
 };
 
 /**
@@ -69,6 +71,7 @@ const onError = (error: any): void => {
   case 'EADDRINUSE':
     console.error(bind + ' is already in use');
     process.exit(1);
+    break;
   default:
     throw error;
   }

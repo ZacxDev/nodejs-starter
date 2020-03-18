@@ -2,7 +2,8 @@ import cors from 'cors';
 import express, { Response, Request, NextFunction } from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import HealthCheckController from './controllers/HealthCheckController';
+import HealthCheckController from 'Controllers/HealthCheckController';
+import GreetingController from 'Controllers/GreetingController';
 
 const app = express();
 const corsOptions = {
@@ -12,12 +13,16 @@ const corsOptions = {
 };
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors(corsOptions));
 
-app.get('/', async (req: Request, res: Response, unusedNext: NextFunction) => {
-  await HealthCheckController.handle(req, res);
+app.get('/', (req: Request, res: Response, unusedNext: NextFunction) => {
+  return HealthCheckController.index(req, res);
+});
+
+app.get('/greeting', (req: Request, res: Response, unusedNext: NextFunction) => {
+  return GreetingController.greeting(req, res);
 });
 
 export default app;
