@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import HealthCheckController from 'Controllers/HealthCheckController';
 import GreetingController from 'Controllers/GreetingController';
+import { ValidateToken } from 'Middleware/ValidateToken';
 
 const app = express();
 const corsOptions = {
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors(corsOptions));
+app.use(ValidateToken);
 
 app.get('/', (req: Request, res: Response, unusedNext: NextFunction) => {
   return HealthCheckController.index(req, res);
