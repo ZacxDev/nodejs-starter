@@ -8,6 +8,7 @@
     "dev": "nodemon --watch src -x node -r ts-node/register/transpile-only -r tsconfig-paths/register --inspect=0.0.0.0:5864 ./src/server.ts"
   },
   "dependencies": {
+    "@types/node-fetch": "^2.5.5",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -31,6 +32,7 @@
     "eslint": "^6.6.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-ava": "^10.0.1",
+    "nodemon": "^2.0.2",
     "sinon": "^8.1.1",
     "ts-node": "^8.6.2",
     "tsconfig-paths": "^3.9.0",

@@ -21,6 +21,9 @@
       ],
       "Clients/*": [
         "src/clients/*"
+      ],
+      "Middleware/*": [
+        "src/middleware/*"
       ]
     }
   },
